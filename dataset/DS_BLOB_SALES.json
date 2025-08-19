@@ -1,0 +1,84 @@
+{
+	"name": "DS_BLOB_SALES",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BLOB_STORAGE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ProductData.csv",
+				"container": "rawdata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "2024.990",
+				"type": "String"
+			},
+			{
+				"name": "1898.091",
+				"type": "String"
+			},
+			{
+				"name": "1898.092",
+				"type": "String"
+			},
+			{
+				"name": "0",
+				"type": "String"
+			},
+			{
+				"name": "2024.994",
+				"type": "String"
+			},
+			{
+				"name": "2024.995",
+				"type": "String"
+			},
+			{
+				"name": "1",
+				"type": "String"
+			},
+			{
+				"name": "5",
+				"type": "String"
+			},
+			{
+				"name": "20170709",
+				"type": "String"
+			},
+			{
+				"name": "20170712",
+				"type": "String"
+			},
+			{
+				"name": "20170702",
+				"type": "String"
+			},
+			{
+				"name": "349",
+				"type": "String"
+			},
+			{
+				"name": "-1",
+				"type": "String"
+			},
+			{
+				"name": "676",
+				"type": "String"
+			},
+			{
+				"name": "43659001",
+				"type": "String"
+			}
+		]
+	}
+}
