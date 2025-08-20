@@ -1,0 +1,101 @@
+{
+	"name": "DF_Transform_SalesData",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_AZURE_SQL",
+						"type": "DatasetReference"
+					},
+					"name": "Sales"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_AZURE_SQL",
+						"type": "DatasetReference"
+					},
+					"name": "sinksales"
+				}
+			],
+			"transformations": [
+				{
+					"name": "deriveddata"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          SalePrice as decimal(10,2),",
+				"          Cost as decimal(10,2),",
+				"          BasePrice as decimal(10,2),",
+				"          Discount as decimal(5,2),",
+				"          FinalPrice as decimal(10,2),",
+				"          InvoiceAmount as decimal(10,2),",
+				"          Quantity as integer,",
+				"          PaymentMethodID as integer,",
+				"          OrderDate as integer,",
+				"          DeliveryDate as integer,",
+				"          InvoiceDate as integer,",
+				"          CustomerID as integer,",
+				"          ReturnedFlag as integer,",
+				"          StoreID as integer,",
+				"          SaleID as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Sales",
+				"Sales derive(OrderDate = toDate(toString(OrderDate), 'yyyyMMdd'),",
+				"          DeliveryDate = toDate(toString(DeliveryDate), 'yyyyMMdd'),",
+				"          InvoiceDate = toDate(toString(InvoiceDate),'yyyymmdd')) ~> deriveddata",
+				"deriveddata sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          SalePrice as decimal(10,2),",
+				"          Cost as decimal(10,2),",
+				"          BasePrice as decimal(10,2),",
+				"          Discount as decimal(5,2),",
+				"          FinalPrice as decimal(10,2),",
+				"          InvoiceAmount as decimal(10,2),",
+				"          Quantity as integer,",
+				"          PaymentMethodID as integer,",
+				"          OrderDate as integer,",
+				"          DeliveryDate as integer,",
+				"          InvoiceDate as integer,",
+				"          CustomerID as integer,",
+				"          ReturnedFlag as integer,",
+				"          StoreID as integer,",
+				"          SaleID as long",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          SalePrice,",
+				"          Cost,",
+				"          BasePrice,",
+				"          Discount,",
+				"          FinalPrice,",
+				"          InvoiceAmount,",
+				"          Quantity,",
+				"          PaymentMethodID,",
+				"          OrderDate,",
+				"          DeliveryDate,",
+				"          InvoiceDate,",
+				"          CustomerID,",
+				"          ReturnedFlag,",
+				"          StoreID,",
+				"          SaleID",
+				"     )) ~> sinksales"
+			]
+		}
+	}
+}
