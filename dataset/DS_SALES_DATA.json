@@ -1,5 +1,5 @@
 {
-	"name": "DS_AZURE_SQL",
+	"name": "DS_SALES_DATA",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_AZ_LEARN_SQL",
@@ -56,18 +56,15 @@
 			},
 			{
 				"name": "OrderDate",
-				"type": "int",
-				"precision": 10
+				"type": "date"
 			},
 			{
 				"name": "DeliveryDate",
-				"type": "int",
-				"precision": 10
+				"type": "date"
 			},
 			{
 				"name": "InvoiceDate",
-				"type": "int",
-				"precision": 10
+				"type": "date"
 			},
 			{
 				"name": "CustomerID",
@@ -92,7 +89,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "stg_Sales"
+			"table": "Sales"
 		}
 	}
 }

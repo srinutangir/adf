@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DS_AZURE_SQL",
+						"referenceName": "DS_SALES_DATA",
 						"type": "DatasetReference"
 					},
 					"name": "sinksales"
@@ -62,9 +62,9 @@
 				"          InvoiceAmount as decimal(10,2),",
 				"          Quantity as integer,",
 				"          PaymentMethodID as integer,",
-				"          OrderDate as integer,",
-				"          DeliveryDate as integer,",
-				"          InvoiceDate as integer,",
+				"          OrderDate as date,",
+				"          DeliveryDate as date,",
+				"          InvoiceDate as date,",
 				"          CustomerID as integer,",
 				"          ReturnedFlag as integer,",
 				"          StoreID as integer,",
