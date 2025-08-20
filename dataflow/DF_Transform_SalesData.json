@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "deriveddata"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -51,7 +54,22 @@
 				"Sales derive(OrderDate = toDate(toString(OrderDate), 'yyyyMMdd'),",
 				"          DeliveryDate = toDate(toString(DeliveryDate), 'yyyyMMdd'),",
 				"          InvoiceDate = toDate(toString(InvoiceDate),'yyyymmdd')) ~> deriveddata",
-				"deriveddata sink(allowSchemaDrift: true,",
+				"deriveddata aggregate(groupBy(SaleID,",
+				"          SalePrice,",
+				"          Cost,",
+				"          BasePrice,",
+				"          Discount,",
+				"          FinalPrice,",
+				"          InvoiceAmount,",
+				"          Quantity,",
+				"          PaymentMethodID,",
+				"          DeliveryDate,",
+				"          InvoiceDate,",
+				"          CustomerID,",
+				"          ReturnedFlag,",
+				"          StoreID),",
+				"     OrderDate = max(OrderDate)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          SalePrice as decimal(10,2),",
@@ -79,7 +97,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          SalePrice,",
+				"          SaleID,",
 				"          Cost,",
 				"          BasePrice,",
 				"          Discount,",
@@ -93,7 +111,7 @@
 				"          CustomerID,",
 				"          ReturnedFlag,",
 				"          StoreID,",
-				"          SaleID",
+				"          SalePrice",
 				"     )) ~> sinksales"
 			]
 		}
