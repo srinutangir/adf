@@ -92,7 +92,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "stg_Sales"
+			"table": "Sales"
 		}
 	}
 }
